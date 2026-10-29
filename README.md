@@ -1,19 +1,35 @@
-# BidHouse — Auction (mirror + retheme of cki-group.jp)
+# BidHouse Group — Premium Auction House
 
-A 100% mirror of https://www.cki-group.jp/ (WordPress corporate site), rethemed to a premium
-auction house ("BidHouse") by changing **content only** — text, images and video.
-UI, layout, CSS, classes, HTML structure, JS logic, colours, fonts and spacing are the
-original site's, unchanged.
+The BidHouse Group website: a premium auction house selling fine watches,
+motor cars, art, jewellery and wine through live and online sales in
+New York and Chicago.
 
-- Source: https://www.cki-group.jp/ (captured 2026-10-29, browser-UA route — plain curl is
-  blocked by NinjaFirewall/Cloudflare; a real-browser User-Agent returns 200)
-- Live: https://dineshmerugu06.github.io/auction/
-- All root-absolute paths rewritten to the `/auction` subpath; the three.js module the
-  homepage imports from esm.sh is vendored locally under `vendor/` (with its OBJ/MTL
-  loaders) so the WebGL company models under
-  `wp/wp-content/themes/standard_sass/models/` load offline.
-- See `RETHEME.md` for the full original → auction content mapping.
-- Known static-mirror limits: the contact/recruit forms are Contact Form 7 (WordPress
-  backend) and cannot submit on GitHub Pages; Google Tag Manager, Google Fonts, TypeSquare
-  and jsDelivr (yakuhanjp) remain external CDN dependencies, as on the original site.
-  Pages may cache for ~10 minutes — hard-refresh or open a fresh tab after updates.
+**Live site:** https://dineshmerugu06.github.io/auction/
+
+## What's on the site
+
+- **Home** — featured sales, the evening sale film, BidHouse in numbers
+- **Live Auctions / Featured Lots** — current and upcoming sales
+- **Bidding Guide** — how to register, bid in the room, by phone or online
+- **The Saleroom** — about BidHouse Saleroom Co., Ltd.
+- **About BidHouse** — about BidHouse Inc., the group in numbers
+- **Private Sales, News & Results** — sold prices and sale reports
+- **Join Our Team / Register to Bid** — careers and bidder registration
+- **Contact** — enquiries for buyers and sellers
+
+## Running it
+
+This is a fully static site (HTML, CSS and JavaScript — no build step and
+no server). Open `index.html` in a browser, or serve the folder with any
+static file server. Page folders at the top level are the site's pages:
+each folder name is its URL path (for example `about-bidhouse/` is the
+About BidHouse page).
+
+The contact and registration forms are front-end only on this static
+host — they render and validate in the browser but do not send mail.
+
+## Notes
+
+- The hero on the home page is a WebGL (Three.js) scene; the Three.js
+  library is bundled locally so the page works without a CDN.
+- Fonts and analytics load from their public CDNs, as is standard.
