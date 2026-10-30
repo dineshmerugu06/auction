@@ -11114,7 +11114,7 @@ screen and (min-width: 48em) {
 }
 
 #paint2_linear_14473_2010 stop[offset="0.518629"] {
-  stop-color: #116ABC
+  stop-color: #701E2C
 }
 
 /* Paper restyle round 2: stage noise reads as dirt on paper — keep texture only on the blue field */
@@ -11124,7 +11124,7 @@ screen and (min-width: 48em) {
 
 /* Grade sheen: pale stops were tuned for black — deepen to accent range inside flipped regions */
 :is(.home_our_commitment, .home_about_us, .footer) .ttl-deco-grade {
-  --bg-img: linear-gradient(-90deg, rgba(17, 106, 188, 0) 15%, #116abc 51%, #5b97cc 67%, #116abc 83%, #003566 100%)
+  --bg-img: linear-gradient(-90deg, rgba(112, 30, 44, 0) 15%, #701E2C 51%, #9A4353 67%, #701E2C 83%, #3D0E16 100%)
 }
 
 /* Footer blue CTA button keeps white text (sits on accent, not paper) */
@@ -11164,7 +11164,7 @@ screen and (min-width: 48em) {
 
 /* Grade sheen gradient was tuned for black everywhere — deepen site-wide */
 .ttl-deco-grade {
-  --bg-img: linear-gradient(-90deg, rgba(17, 106, 188, 0) 15%, #116abc 51%, #5b97cc 67%, #116abc 83%, #003566 100%)
+  --bg-img: linear-gradient(-90deg, rgba(112, 30, 44, 0) 15%, #701E2C 51%, #9A4353 67%, #701E2C 83%, #3D0E16 100%)
 }
 
 /* Paper restyle round 4: first .lps_sec title was light for the old black stage */
@@ -11193,6 +11193,49 @@ screen and (min-width: 48em) {
 .strongths_item .clr-wht,
 .strongths_item .clr-wht * {
   color: var(--clr-text-primary)
+}
+
+/* ============================================================
+   ROUND 6 — NEW VISUAL IDENTITY (de-fingerprint)
+   The origin's blue accent and dotted display type are replaced:
+   accent is now bordeaux, display type is now Fraunces serif.
+   Tokens are redefined here so every var() consumer follows.
+   ============================================================ */
+:root {
+  --clr-primary-default: #701E2C;
+  --clr-primary-dark: #3D0E16;
+  --clr-primary-light: #C08A94;
+  --clr-bg-02: #EBD9DC;
+  --clr-sub-06: #8A5A63;
+  --bg-gradient-static: linear-gradient(90deg, #C08A94 0%, #701E2C 100%);
+  --bg-gradient-animation: linear-gradient(-90deg, rgba(112, 30, 44, 0) 15%, #701E2C 51%, #9A4353 67%, #701E2C 83%, #3D0E16 100%);
+  --font-en-display: "Fraunces", serif;
+  --font-en-heading: "Fraunces", serif;
+  --font-jp-heading: "Fraunces", serif
+}
+
+/* Headline/title classes take the display serif directly
+   (the base stacks route non-.font-en titles through the body sans) */
+.ttl-01,
+.ttl-02,
+.ttl-03,
+.ttl-04,
+.ttl-05,
+.ttl-06,
+.catch_copy-style,
+.ttl-deco-grade {
+  font-family: "Fraunces", serif
+}
+
+/* Primary buttons become pills */
+.btn a,
+a.btn {
+  border-radius: 999px
+}
+
+/* Accent arrow circles: bordeaux instead of black (READ MORE .btn-more circles stay black) */
+.arrow-circle.bg-blk {
+  background-color: var(--clr-primary-default)
 }
 
 .lps_sec .ttl-01.font-jp .ttl-01-en {
