@@ -11172,6 +11172,29 @@ screen and (min-width: 48em) {
   color: var(--clr-text-primary)
 }
 
+/* Paper restyle round 5: Our Strengths cards were black-gradient slabs (black -> #444) —
+   the section's main content, so they count as section grounds. Flip to white cards on
+   paper with a light ink border; light text inside flips to ink, number label to secondary. */
+.strongths_item {
+  background: var(--clr-wht);
+  border: 1px solid rgba(32, 42, 54, .25);
+  color: var(--clr-text-primary)
+}
+
+.strongths_item .num-txt {
+  color: var(--clr-text-secondary)
+}
+
+.strongths_item .clr-text-light,
+.strongths_item .clr-text-light * {
+  color: var(--clr-text-primary)
+}
+
+.strongths_item .clr-wht,
+.strongths_item .clr-wht * {
+  color: var(--clr-text-primary)
+}
+
 .lps_sec .ttl-01.font-jp .ttl-01-en {
   color: var(--clr-text-secondary)
 }
