@@ -11249,3 +11249,309 @@ a.btn {
 .head_sub_nav--img .img_txt {
   background-image: linear-gradient(90deg, rgba(192, 138, 148, 0.8) 0%, rgba(112, 30, 44, 0.8) 50%, rgba(32, 42, 54, 0.8) 100%)
 }
+
+/* ============================================================
+   Round 8: top-bar navigation + inner-page differentiation
+   ============================================================ */
+
+/* --- Nav: the floating pill becomes a full-width paper bar --- */
+.header {
+  background-color: var(--clr-bg-01);
+  border-bottom: 1px solid rgba(32, 42, 54, .18)
+}
+
+.header.is-scroll {
+  box-shadow: 0 10px 34px rgba(32, 42, 54, .10)
+}
+
+.gnav {
+  background-color: transparent;
+  border-radius: 0
+}
+
+.header.is-scroll .gnav {
+  background-color: transparent
+}
+
+/* dropdown sheet matches the bar */
+.header::before {
+  background-color: var(--clr-bg-01);
+  box-shadow: 0 24px 40px rgba(32, 42, 54, .10)
+}
+
+/* links: ink at rest in every scroll state */
+.header:not(.is-scroll) .gnav--link,
+.header.is-scroll .gnav--link {
+  color: var(--clr-text-primary)
+}
+
+@media print,
+screen and (min-width: 67.5625em) {
+
+  /* bordeaux underline-grow on hover / current */
+  .gnav--link::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: .3rem;
+    height: 2px;
+    background-color: var(--clr-primary-default);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .35s ease
+  }
+
+  .gnav--menu>li:hover>.gnav--link::after,
+  .gnav--menu>li.current-menu-item>.gnav--link::after,
+  .gnav--menu>li.current-menu-parent>.gnav--link::after {
+    transform: scaleX(1)
+  }
+
+  .gnav--menu>li:hover>.gnav--link,
+  .gnav--menu>li.current-menu-item>.gnav--link,
+  .gnav--menu>li.current-menu-parent>.gnav--link {
+    color: var(--clr-primary-default) !important
+  }
+}
+
+/* wordmark: Fraunces text replaces the logo image */
+.bh-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: "Fraunces", serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1;
+  color: var(--clr-text-primary);
+  white-space: nowrap
+}
+
+.bh-wordmark::before {
+  content: "";
+  width: .5em;
+  height: .5em;
+  flex-shrink: 0;
+  background-color: var(--clr-primary-default)
+}
+
+/* no blend tricks on the bar: logo and menu button stay ink */
+.gnav_btn.is-active,
+.gnav_btn.is-active+.header--logo {
+  mix-blend-mode: normal
+}
+
+/* Contact Us: ink-outline pill (Register to Bid stays bordeaux) */
+.gnav--cta .gnav--contact a {
+  background-color: transparent;
+  color: var(--clr-text-primary);
+  border-color: rgba(32, 42, 54, .55)
+}
+
+.gnav--cta .gnav--contact a::before {
+  opacity: 0
+}
+
+.gnav--cta .gnav--contact .arrow-circle {
+  background-color: var(--clr-text-primary);
+  --arrow_color: var(--clr-wht) !important
+}
+
+@media(hover: hover) {
+  .gnav--cta .gnav--contact a:hover {
+    color: var(--clr-primary-default);
+    border-color: var(--clr-primary-default)
+  }
+
+  .gnav--cta .gnav--contact a:hover .arrow-circle {
+    background-color: var(--clr-primary-default)
+  }
+}
+
+/* mobile / tablet: paper overlay menu, serif ink links, ink burger */
+@media screen and (max-width: 67.5em) {
+  .gnav {
+    background-color: var(--clr-bg-01)
+  }
+
+  .gnav--link {
+    color: var(--clr-text-primary);
+    font-family: "Fraunces", serif;
+    font-size: 1.35rem;
+    letter-spacing: .02em
+  }
+
+  .gnav--menu>li:not(:last-child) {
+    border-bottom-color: rgba(32, 42, 54, .16)
+  }
+
+  .gnav_btn--lines span {
+    background-color: var(--clr-text-primary)
+  }
+}
+
+/* --- Inner pages: banner treatment --- */
+.page_ttl--bg {
+  position: relative
+}
+
+.page_ttl--bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(112, 30, 44, .16) 0%, rgba(61, 14, 22, .36) 100%);
+  pointer-events: none
+}
+
+/* bordeaux rule under the banner title (pale tint on the bordeaux band) */
+.page_ttl .page_ttl-jp::after {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 3px;
+  margin-top: 1.375rem;
+  background-color: var(--clr-primary-default)
+}
+
+.page_ttl-has_bg .page_ttl-jp::after {
+  background-color: #C08A94
+}
+
+.page_ttl:not(.page_ttl-has_bg) {
+  border-bottom-color: rgba(32, 42, 54, .18)
+}
+
+.page_ttl:not(.page_ttl-has_bg) .page_ttl-en {
+  color: var(--clr-primary-default)
+}
+
+/* breadcrumbs: bordeaux separators, bordeaux current on paper pages */
+.page_ttl-has_bg .breadcrumbs span span:not(:last-child)::after {
+  background-color: #C08A94
+}
+
+.page_ttl:not(.page_ttl-has_bg) .breadcrumbs span span:not(:last-child)::after {
+  background-color: var(--clr-primary-default)
+}
+
+.page_ttl:not(.page_ttl-has_bg) .breadcrumb_last {
+  color: var(--clr-primary-default);
+  font-weight: 700
+}
+
+/* --- Inner pages: section headings + rhythm --- */
+body:not(.home) .lps_sec .ttl-01::before,
+body:not(.home) .lps_sec .ttl-02::before {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 3px;
+  margin-bottom: 1.125rem;
+  background-color: var(--clr-primary-default)
+}
+
+body:not(.home) .lps_sec .ttl-01.txt-ctr::before,
+body:not(.home) .lps_sec .ttl-02.txt-ctr::before {
+  margin-inline: auto
+}
+
+.lps_sec:not(:first-child) {
+  border-top-color: rgba(32, 42, 54, .16)
+}
+
+/* --- Inner pages: lists, cards, chips, pager --- */
+body:not(.home) .cat_list a {
+  border-radius: 999px
+}
+
+.posts-news .post {
+  border-bottom-color: rgba(32, 42, 54, .16)
+}
+
+.posts-news .post:first-child {
+  border-top-color: rgba(32, 42, 54, .16)
+}
+
+@media(hover: hover) {
+  .posts-news .post:hover {
+    background-color: rgba(32, 42, 54, .03)
+  }
+
+  .posts-news .post:hover .post--ttl {
+    color: var(--clr-primary-default)
+  }
+}
+
+.posts-job .post {
+  background-color: var(--clr-wht);
+  border: 1px solid rgba(32, 42, 54, .16);
+  border-radius: 12px;
+  padding: 1.75rem
+}
+
+@media(hover: hover) {
+  .posts-job .post:hover {
+    border-color: var(--clr-primary-default)
+  }
+
+  .posts-job .post:hover .post--ttl {
+    color: var(--clr-primary-default)
+  }
+}
+
+.archive_list--btn {
+  border-color: rgba(32, 42, 54, .3);
+  border-radius: 999px
+}
+
+.archive-pulldown .active .archive_list--btn {
+  border-color: var(--clr-primary-default);
+  color: var(--clr-primary-default)
+}
+
+.wp-pagenavi>* {
+  border-radius: 999px
+}
+
+/* --- Inner pages: tables + forms --- */
+.mce-table01 th,
+.mce-table01 td {
+  border-bottom-color: rgba(32, 42, 54, .18)
+}
+
+.mce-table01 th {
+  background-color: rgba(112, 30, 44, .06)
+}
+
+.mce-table02 th,
+.mce-table02 td {
+  border-color: rgba(32, 42, 54, .18)
+}
+
+.mce-table02 th {
+  background-color: var(--clr-bg-02);
+  color: var(--clr-text-primary)
+}
+
+.wpcf7 input:focus,
+.wpcf7 textarea:focus,
+.wpcf7 select:focus {
+  border-color: var(--clr-primary-default);
+  box-shadow: 0 0 0 3px rgba(112, 30, 44, .14);
+  outline: none
+}
+
+/* Round 8 fix: hero deco text clears the new opaque bar */
+.hero--deco {
+  padding-top: 6.75rem
+}
+
+/* Round 8 fix: no exclusion blend on the bar (JS toggles .is-blend on scroll;
+   the contact template forces it) — wordmark and burger stay ink on paper */
+.header--logo.is-blend,
+.gnav_btn.is-blend,
+.page-contact-simple .header--logo {
+  mix-blend-mode: normal
+}
