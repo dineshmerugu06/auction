@@ -20,9 +20,12 @@ content is 100% BidHouse.
   Sales, News & Results) and 254 images swapped in place at their exact
   original dimensions, plus a new hero film (gavel + paddle clips,
   `assets/media/2025/10/movie.mp4`, 1920×1080).
-- **WebGL hero models, vendored locally** — Three.js and the OBJ/MTL
-  models are bundled in this repo, so the 3D hero works fully offline,
-  with no CDN dependency.
+- **Origin-logo 3D models removed (2026-10-30)** — the floating WebGL
+  models in "Our Business" turned out to be the previous company's logo
+  marks as 3D objects, so the whole WebGL layer was taken out: the
+  canvas element, the Three.js loader code, the model files and the
+  vendored Three.js library are all deleted. The section's photo cards
+  carry the section on their own now.
 - **Brand-trace cleanup** — every leftover trace of the previous identity
   removed: page slugs, file names, CSS class names, form ids,
   percent-encoded links and metadata were all renamed to BidHouse.
@@ -55,18 +58,16 @@ path on the site and holds one `index.html`.
 | `news/` | News & Results — by category (`community/`, `safety/`, `careers/`, `benefits/`, `others/`) and by year (`date/`) |
 | `recruit/` | Careers — job listings (`job/`), application form (`entry/`) |
 | `contact/`, `privacy/`, `philosophy-message/`, `sitemap/` | Contact, privacy policy, message from the house, site map |
-| `assets/theme/` | The design system: all CSS, JS, images, logos, 3D models |
+| `assets/theme/` | The design system: all CSS, JS, images and logos |
 | `assets/theme/css/style.css` | The one stylesheet for the whole site (11,000+ lines, prettified). Colour variables live in `:root` at the top; the **paper-restyle override block** is at the very end |
 | `assets/theme/css/print.css`, `style-c.css` | Print styles; an empty stylesheet kept because pages still link it |
 | `assets/theme/dist/js/` | Page scripts (minified build output): `common.min.js` (every page), `home.min.js` (home only), `contact.min.js`, `not-home.min.js`, `not-contact.min.js`, `single-archive.min.js` |
 | `assets/theme/js/plugins/` | Animation libraries: GSAP, ScrollTrigger, Splide (sliders) |
 | `assets/theme/images/` | Theme images and logos (`logo-bidhouse-row.svg`, `logo-saleroom-row.svg`, section photos) |
-| `assets/theme/models/model-bidhouse/`, `model-saleroom/` | The WebGL hero models (`model.obj` + `model.mtl` + `texture.png`) |
 | `assets/theme/style.css` | Theme header/description file (legacy theme metadata, not the site's styles) |
 | `assets/media/YYYY/MM/` | Every photo and video used in page content, by year/month. Hero film: `assets/media/2025/10/movie.mp4` |
 | `assets/plugins/` | Form scripts: `contact-form-7`, `cf7-conditional-fields`, `akismet` |
 | `assets/core/` | Library JavaScript the pages load: jQuery + core dist JS |
-| `assets/vendor/` | Three.js for the WebGL hero: `three.mjs`, `OBJLoader.mjs`, `MTLLoader.mjs` |
 | `favicon.ico`, `apple-touch-icon.png` | Browser / home-screen icons |
 | `.nojekyll` | Tells GitHub Pages to serve the files exactly as-is (no Jekyll processing) |
 | `.gitignore` | Keeps `node_modules` out of the repo |
@@ -84,8 +85,6 @@ path on the site and holds one `index.html`.
 - **Animation.** GSAP + ScrollTrigger drive the scroll animations
   (headline reveals, the commitment circle animation, parallax);
   Splide runs the sliders. All wired in `assets/theme/dist/js/`.
-- **WebGL hero.** `home.min.js` loads Three.js from `assets/vendor/`
-  and the OBJ/MTL models from `assets/theme/models/`, all local files.
 - **Forms are front-end only.** They render and validate in the
   browser, but GitHub Pages cannot receive submissions or send mail.
 
@@ -100,8 +99,7 @@ path on the site and holds one `index.html`.
   end.
 - **Change the hero video** — replace `assets/media/2025/10/movie.mp4`.
 - **Run locally** — `python3 -m http.server` in this folder, then open
-  `http://localhost:8000/` (serve it, don't open the file directly —
-  the WebGL models need http).
+  `http://localhost:8000/` (serve it, don't open the file directly).
 - **Deploy** — push to `main`. GitHub Pages publishes automatically;
   allow a few minutes, then hard-refresh (Pages caches aggressively).
 
