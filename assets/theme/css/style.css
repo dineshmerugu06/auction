@@ -11872,3 +11872,685 @@ body:not(.home) .lps_sec .ttl-01.font-en {
     border-bottom-color: rgba(250, 247, 240, .18)
   }
 }
+
+
+/* ============================================================
+   ROUND 11 — AWARD STYLE (site-wide)
+   Dinesh approved the Awwwards-pattern sample; this ports it
+   to every page. Slim near-invisible bar + fullscreen serif
+   menu (the prestige pattern), home poster hero at ~13.6vw,
+   catalogue № kickers, Business ruled index, chapter-opener
+   inner banners. DOM is injected by assets/award.js; every
+   rule is scoped to body.aws so the site is untouched if the
+   script does not run.
+   Theme chrome is hidden by OFFSCREEN EXILE, never
+   display:none — theme JS measures element widths in loops
+   that deadlock at width 0 (proven in the sample build).
+   ============================================================ */
+
+/* ---------- theme chrome: exile ---------- */
+body.aws .gnav_btn,
+body.aws .header--logo,
+body.aws header.header,
+body.aws .header--bg {
+  position: absolute !important;
+  left: -99999px !important;
+  top: 0 !important;
+  width: 100vw !important;
+  overflow: hidden !important
+}
+
+/* ---------- slim bar ---------- */
+.aws-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 5vw;
+  color: var(--clr-text-primary);
+  pointer-events: none
+}
+
+body.home:not(.aws-scrolled):not(.aws-menu-open) .aws-bar,
+body.aws-menu-open .aws-bar {
+  color: #FAF7F0
+}
+
+.aws-bar>* {
+  pointer-events: auto
+}
+
+.aws-logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: .34em;
+  color: inherit;
+  text-decoration: none
+}
+
+.aws-mark {
+  width: .62rem;
+  height: .62rem;
+  margin-right: .95rem;
+  background-color: var(--clr-primary-light);
+  flex: none
+}
+
+.aws-burger {
+  display: inline-flex;
+  align-items: center;
+  gap: .85rem;
+  background: none;
+  border: 0;
+  padding: .4rem 0;
+  color: inherit;
+  cursor: pointer
+}
+
+.aws-burger-label {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .72rem;
+  letter-spacing: .22em
+}
+
+.aws-burger-lines {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 7px
+}
+
+.aws-burger-lines span {
+  display: block;
+  width: 34px;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform .45s cubic-bezier(.76, 0, .24, 1)
+}
+
+body.aws-menu-open .aws-burger-lines span:first-child {
+  transform: translateY(4.5px) rotate(45deg)
+}
+
+body.aws-menu-open .aws-burger-lines span:last-child {
+  transform: translateY(-4.5px) rotate(-45deg)
+}
+
+/* ---------- fullscreen menu ---------- */
+.aws-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-text-primary);
+  color: #FAF7F0;
+  transform: translateY(-103%);
+  transition: transform .7s cubic-bezier(.76, 0, .24, 1);
+  visibility: hidden
+}
+
+body.aws-menu-open .aws-menu {
+  transform: none;
+  visibility: visible
+}
+
+.aws-menu-photo {
+  position: relative;
+  flex: none;
+  height: 19vh;
+  min-height: 7.5rem;
+  background-image: url(../images/business-img02.jpg);
+  background-size: cover;
+  background-position: center 30%
+}
+
+.aws-menu-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(112, 30, 44, .42), rgba(61, 14, 22, .55));
+  mix-blend-mode: multiply
+}
+
+.aws-menu-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0
+}
+
+.aws-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 3.2vh 5vw 0
+}
+
+.aws-menu-list li {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .55s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
+  transition-delay: 0s
+}
+
+body.aws-menu-open .aws-menu-list li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(.18s + var(--d) * .06s)
+}
+
+.aws-menu-list a {
+  display: flex;
+  align-items: baseline;
+  color: #FAF7F0;
+  text-decoration: none;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 8.8vw, 4.3rem);
+  line-height: 1.22
+}
+
+.aws-menu-list .aws-no {
+  flex: none;
+  width: 3.4rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  color: var(--clr-primary-light)
+}
+
+.aws-menu-name {
+  white-space: nowrap
+}
+
+.aws-menu-list a:hover .aws-menu-name,
+.aws-menu-list a:focus-visible .aws-menu-name {
+  color: var(--clr-primary-light)
+}
+
+.aws-menu-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 5vw;
+  border-top: 1px solid rgba(250, 247, 240, .25);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .66rem;
+  letter-spacing: .22em;
+  color: rgba(250, 247, 240, .72)
+}
+
+@media screen and (min-width: 67.5em) {
+  .aws-menu {
+    flex-direction: row
+  }
+
+  .aws-menu-photo {
+    order: 2;
+    width: 38%;
+    height: auto;
+    min-height: 0
+  }
+
+  .aws-menu-main {
+    order: 1
+  }
+
+  .aws-menu-list {
+    margin: auto 0;
+    padding: 0 4vw 0 5vw
+  }
+
+  .aws-menu-list a {
+    font-size: clamp(2.4rem, 4vw, 4.2rem);
+    line-height: 1.28
+  }
+}
+
+/* ---------- kickers ---------- */
+.aws-kicker,
+.aws-kicker-sec {
+  display: flex;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .72rem;
+  letter-spacing: .25em;
+  margin: 0
+}
+
+.aws-kicker .aws-no,
+.aws-kicker-sec .aws-no {
+  color: var(--clr-primary-light);
+  letter-spacing: .08em
+}
+
+.aws-kicker .aws-rule,
+.aws-kicker-sec .aws-rule {
+  display: inline-block;
+  width: 3.2rem;
+  height: 1px;
+  margin: 0 1.05rem;
+  background-color: var(--clr-primary-light);
+  flex: none
+}
+
+.aws-kicker-sec {
+  color: #647283;
+  margin-bottom: 1.4rem
+}
+
+.aws-kicker-sec .aws-no {
+  color: var(--clr-primary-default)
+}
+
+.aws-kicker-sec .aws-rule {
+  background-color: var(--clr-primary-default)
+}
+
+/* The stage's ink layer is frozen mid-phase by the collapsed
+   theme hero (its scrub was keyed to the hero's height), which
+   left transparent sections (commitment, about) sitting on
+   ink. The poster hero carries its own ink ground, so the
+   stage ink layer is exiled on the home page; the ivory base
+   layer shows through transparent sections as designed. */
+body.home.aws .parallax_box--bg.blue {
+  position: absolute !important;
+  left: -99999px !important;
+  top: 0 !important;
+  width: 100vw !important;
+  overflow: hidden !important
+}
+
+/* ---------- home: poster hero ---------- */
+body.home.aws .hero {
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important
+}
+
+body.aws .hero--deco,
+body.aws .hero--deco-txt-wrap,
+body.aws .hero--scroll,
+body.aws .hero--movie,
+body.aws .scroll_horizontal {
+  position: absolute !important;
+  left: -99999px !important;
+  top: 0 !important
+}
+
+.aws-hero {
+  position: relative;
+  background-color: var(--clr-text-primary);
+  color: #FAF7F0;
+  overflow: hidden
+}
+
+.aws-hero-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding: 10.5vh 5vw 0
+}
+
+.aws-hero .aws-kicker {
+  color: rgba(250, 247, 240, .85)
+}
+
+.aws-hero-title {
+  margin: 2.2vh 0 0;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 13.6vw;
+  line-height: 1.05;
+  letter-spacing: 0
+}
+
+.aws-line {
+  display: block;
+  overflow: hidden
+}
+
+.aws-line>span {
+  display: block;
+  transform: translateY(112%);
+  transition: transform 1s cubic-bezier(.22, 1, .36, 1)
+}
+
+.aws-line:nth-child(2)>span {
+  transition-delay: .06s
+}
+
+.aws-line:nth-child(3)>span {
+  transition-delay: .12s
+}
+
+body.aws-ready .aws-line>span {
+  transform: none
+}
+
+.aws-hero-fig {
+  position: relative;
+  width: min(64%, 26rem);
+  margin: 3.5vh 0 0 auto
+}
+
+.aws-hero-fig::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(14px, 16px);
+  border: 1px solid var(--clr-primary-light);
+  pointer-events: none;
+  z-index: 2
+}
+
+.aws-hero-fig img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/5;
+  object-fit: cover
+}
+
+.aws-hero-fig figcaption {
+  margin-top: 2rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: .66rem;
+  letter-spacing: .18em;
+  line-height: 2;
+  color: rgba(250, 247, 240, .72)
+}
+
+.aws-hero-fig figcaption .aws-no {
+  color: var(--clr-primary-light)
+}
+
+.aws-hero-stats {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0 1.55rem;
+  border-top: 1px solid rgba(250, 247, 240, .28)
+}
+
+.aws-stat-num {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 3.3rem;
+  line-height: 1
+}
+
+.aws-stat-lbl {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .66rem;
+  letter-spacing: .22em;
+  line-height: 1.8;
+  color: rgba(250, 247, 240, .72)
+}
+
+.aws-scroll {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .66rem;
+  letter-spacing: .22em;
+  color: rgba(250, 247, 240, .72)
+}
+
+.aws-scroll i {
+  display: inline-block;
+  width: 2.6rem;
+  height: 1px;
+  margin-left: .7rem;
+  background-color: currentColor
+}
+
+@media screen and (min-width: 67.5em) {
+  .aws-hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    grid-template-rows: auto 1fr auto;
+    padding-top: 16vh
+  }
+
+  .aws-hero .aws-kicker {
+    grid-column: 1;
+    grid-row: 1
+  }
+
+  .aws-hero-title {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 4vh;
+    font-size: min(13.6vw, 11.5rem)
+  }
+
+  .aws-hero-fig {
+    grid-column: 2;
+    grid-row: 1/3;
+    align-self: center;
+    justify-self: end;
+    width: min(100%, 29rem);
+    margin: 0
+  }
+
+  .aws-hero-stats {
+    grid-column: 1/-1;
+    grid-row: 3
+  }
+}
+
+/* ---------- home: Business ruled index ---------- */
+.aws-index {
+  list-style: none;
+  margin: 2.6rem 0 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(32, 42, 54, .25)
+}
+
+.aws-index li {
+  border-top: 1px solid rgba(32, 42, 54, .25)
+}
+
+.aws-index a {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 1.3rem .2rem;
+  color: var(--clr-text-primary);
+  text-decoration: none
+}
+
+.aws-index .aws-no {
+  flex: none;
+  min-width: 3rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: .08em;
+  color: var(--clr-primary-default)
+}
+
+.aws-index-name {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(1.45rem, 5.6vw, 2.05rem);
+  line-height: 1.15;
+  transition: color .3s ease
+}
+
+.aws-index a:hover .aws-index-name,
+.aws-index a:focus-visible .aws-index-name {
+  color: var(--clr-primary-default)
+}
+
+.aws-arrow {
+  margin-left: auto;
+  font-size: 1.15rem;
+  color: var(--clr-primary-default)
+}
+
+/* home section headings in the award voice */
+body.home.aws .home_our_commitment--ttl,
+body.home.aws .home_out_business .ttl-01,
+body.home.aws .home_out_strengths .ttl-02,
+body.home.aws .home_about_us .ttl-02 {
+  font-family: "Fraunces", serif;
+  color: var(--clr-text-primary)
+}
+
+body.home.aws .home_out_business .ttl-01 {
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  line-height: 1.1
+}
+
+body.aws .ttl-deco-grade {
+  font-family: "Fraunces", serif
+}
+
+body.aws .ttl-deco-grade::before {
+  display: none !important
+}
+
+body.home.aws .home_out_business .ttl-01-jp {
+  display: block;
+  margin-top: .9rem;
+  font-size: clamp(1.15rem, 4.4vw, 1.5rem);
+  font-weight: 600;
+  color: var(--clr-text-primary)
+}
+
+/* ---------- inner pages: chapter-opener banner ---------- */
+body:not(.home).aws .page_ttl {
+  background-color: var(--clr-bg-01);
+  border-bottom: 0;
+  padding-top: 8.75rem
+}
+
+body:not(.home).aws .page_ttl .inner:has(>.page_ttl-jp) {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--clr-primary-default);
+  padding-bottom: 2.1rem;
+  margin-bottom: .5rem
+}
+
+body:not(.home).aws .page_ttl-en {
+  order: -1;
+  display: flex;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .74rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--clr-primary-default)
+}
+
+body:not(.home).aws .page_ttl-en .aws-no {
+  color: var(--clr-primary-default);
+  letter-spacing: .08em
+}
+
+body:not(.home).aws .page_ttl-en .aws-rule {
+  display: inline-block;
+  width: 3.2rem;
+  height: 1px;
+  margin: 0 1.05rem;
+  background-color: var(--clr-primary-default);
+  flex: none
+}
+
+body:not(.home).aws .page_ttl-jp {
+  margin-top: 1.7rem;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(3rem, 14.5vw, 7.5rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+  color: var(--clr-text-primary)
+}
+
+body:not(.home).aws .page_ttl-jp::after,
+body:not(.home).aws .page_ttl-has_bg .page_ttl-jp::after {
+  width: 3.4rem;
+  height: 5px;
+  margin-top: 1.9rem;
+  background-color: var(--clr-primary-default)
+}
+
+body:not(.home).aws .breadcrumbs {
+  padding-top: 1.05rem;
+  text-align: right;
+  font-size: .82rem
+}
+
+body:not(.home).aws .breadcrumbs a,
+body:not(.home).aws .page_ttl-has_bg .breadcrumbs a {
+  color: #647283
+}
+
+body:not(.home).aws .breadcrumb_last,
+body:not(.home).aws .page_ttl-has_bg .breadcrumb_last {
+  color: var(--clr-primary-light);
+  font-weight: 600
+}
+
+body:not(.home).aws .page_ttl--bg {
+  width: 100%;
+  max-width: none;
+  height: clamp(220px, 58vw, 520px);
+  aspect-ratio: auto;
+  margin: 2.2rem 0 0;
+  clip-path: inset(0 round 0) !important;
+  border-radius: 0
+}
+
+body:not(.home).aws .page_ttl--bg::after {
+  content: none
+}
+
+/* inner first-section headings: ink Fraunces, not slate sans */
+body:not(.home).aws .lps_sec .ttl-01-en {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  color: var(--clr-text-primary)
+}
+
+body:not(.home).aws .lps_sec .ttl-01-jp {
+  color: var(--clr-text-primary)
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .aws-line>span,
+  .aws-menu,
+  .aws-menu-list li,
+  .aws-burger-lines span {
+    transition: none !important
+  }
+
+  .aws-line>span {
+    transform: none !important
+  }
+}
