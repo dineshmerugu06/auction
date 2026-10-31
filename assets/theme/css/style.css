@@ -11555,3 +11555,276 @@ body:not(.home) .cat_list a {
 .page-contact-simple .header--logo {
   mix-blend-mode: normal
 }
+
+/* ============================================================
+   Round 9: dark ink nav bar + inverted paper inner banners
+   Round 8's paper bar read as "no change" on a phone, so the
+   bar goes ink with paper type, and inner-page banners flip
+   from bordeaux bands to paper with ink titles.
+   ============================================================ */
+
+/* --- Nav: ink bar in every state, bordeaux hairline --- */
+.header {
+  background-color: var(--clr-text-primary);
+  border-bottom: 2px solid var(--clr-primary-default)
+}
+
+.header.is-scroll {
+  box-shadow: 0 10px 34px rgba(32, 42, 54, .28)
+}
+
+/* wordmark: paper serif on ink; the square mark takes the tint
+   (bordeaux on ink is too low-contrast at this size) */
+.bh-wordmark {
+  color: var(--clr-bg-01)
+}
+
+.bh-wordmark::before {
+  background-color: #C08A94
+}
+
+/* links: paper at rest in every scroll state */
+.header:not(.is-scroll) .gnav--link,
+.header.is-scroll .gnav--link {
+  color: var(--clr-bg-01)
+}
+
+/* dropdown sheet open: top row sits on paper — links go ink
+   (reinforces the origin :has rule at the same specificity).
+   Desktop only: on touch, tapping the mobile accordion leaves the
+   parent li in a sticky :hover state and these flips would fire
+   inside the ink overlay menu. */
+@media print,
+screen and (min-width: 67.5625em) {
+  .header:has(.menu-item-has-children:hover) .gnav--link {
+    color: var(--clr-text-primary)
+  }
+}
+
+@media print,
+screen and (min-width: 67.5625em) {
+
+  /* hover / current on the ink bar: tint text, bordeaux underline (Round 8) */
+  .gnav--menu>li:hover>.gnav--link,
+  .gnav--menu>li.current-menu-item>.gnav--link,
+  .gnav--menu>li.current-menu-parent>.gnav--link {
+    color: #C08A94 !important
+  }
+
+  /* sheet open: the hovered parent sits on paper — bordeaux instead */
+  .gnav--menu:has(.menu-item-has-children:hover)>li:hover>.gnav--link {
+    color: var(--clr-primary-default) !important
+  }
+}
+
+/* sheet open: the paper sheet also covers the logo zone and the CTA row —
+   wordmark flips to ink (square back to bordeaux), Contact flips to its
+   Round 8 ink-outline state. Desktop only, same sticky-hover reason. */
+@media print,
+screen and (min-width: 67.5625em) {
+
+  body:has(.header .menu-item-has-children:hover) .bh-wordmark,
+  body:has(.header--bg.is-hovered) .bh-wordmark {
+    color: var(--clr-text-primary)
+  }
+
+  body:has(.header .menu-item-has-children:hover) .bh-wordmark::before,
+  body:has(.header--bg.is-hovered) .bh-wordmark::before {
+    background-color: var(--clr-primary-default)
+  }
+
+  body:has(.header .menu-item-has-children:hover) .gnav--cta .gnav--contact a,
+  body:has(.header--bg.is-hovered) .gnav--cta .gnav--contact a {
+    color: var(--clr-text-primary);
+    border-color: rgba(32, 42, 54, .55)
+  }
+
+  body:has(.header .menu-item-has-children:hover) .gnav--cta .gnav--contact .arrow-circle,
+  body:has(.header--bg.is-hovered) .gnav--cta .gnav--contact .arrow-circle {
+    background-color: var(--clr-text-primary);
+    --arrow_color: var(--clr-wht) !important
+  }
+}
+
+/* Contact Us on the ink bar: paper-outline pill (Register stays bordeaux) */
+.gnav--cta .gnav--contact a {
+  background-color: transparent;
+  color: var(--clr-bg-01);
+  border: 1px solid rgba(247, 247, 244, .65)
+}
+
+.gnav--cta .gnav--contact .arrow-circle {
+  background-color: var(--clr-bg-01);
+  --arrow_color: var(--clr-primary-default) !important
+}
+
+@media(hover: hover) {
+  .gnav--cta .gnav--contact a:hover {
+    background-color: var(--clr-primary-default);
+    border-color: var(--clr-primary-default);
+    color: var(--clr-wht)
+  }
+
+  .gnav--cta .gnav--contact a:hover .arrow-circle {
+    background-color: var(--clr-primary-default);
+    --arrow_color: var(--clr-wht) !important
+  }
+}
+
+/* dropdown panel links: bordeaux hover on the paper sheet
+   (!important because the origin forces .hover_area a to black) */
+@media(hover: hover) {
+  .head_sub_nav--link:hover {
+    color: var(--clr-primary-default) !important
+  }
+}
+
+/* mobile / tablet: ink overlay menu, paper serif links, paper burger */
+@media screen and (max-width: 67.5em) {
+  .gnav {
+    background-color: var(--clr-text-primary);
+    color: var(--clr-bg-01)
+  }
+
+  .gnav--link {
+    color: var(--clr-bg-01)
+  }
+
+  /* the origin turns all links ink when a dropdown parent is hovered
+     (for the desktop paper sheet); on touch that :hover sticks after
+     tapping the accordion and would blank the labels on the ink panel */
+  .gnav--menu:has(.menu-item-has-children:hover) .gnav--link {
+    color: var(--clr-bg-01)
+  }
+
+  .gnav--menu>li:not(:last-child) {
+    border-bottom-color: rgba(247, 247, 244, .18)
+  }
+
+  .gnav_btn--lines span {
+    background-color: var(--clr-bg-01)
+  }
+
+  /* accordion content inside the ink panel */
+  .gnav .head_sub_nav--wrap a {
+    color: var(--clr-bg-01)
+  }
+
+  /* the origin forces sub-nav links black with !important (.hover_area a) */
+  .gnav .hover_area a {
+    color: var(--clr-bg-01) !important
+  }
+
+  .gnav .hover_area:has(a:hover) {
+    background-color: transparent
+  }
+
+  /* accordion + / chevron marks: paper, not ink */
+  .gnav_sub_toggle {
+    color: var(--clr-bg-01)
+  }
+
+  .gnav--menu li:not(.menu-item-has-children) .gnav--link::after {
+    background-color: var(--clr-bg-01)
+  }
+
+  .gnav .ttl-04 {
+    color: var(--clr-bg-01)
+  }
+
+  .gnav .clr-mono-03,
+  .gnav .clr-mono-03 * {
+    color: #C08A94
+  }
+
+  .gnav--subnav a {
+    color: var(--clr-bg-01)
+  }
+}
+
+/* --- Inner pages: invert the banner ---
+   The bordeaux band was the fixed .parallax_box--bg.blue stage layer
+   (opacity 1 at page top) showing through the transparent .page_ttl.
+   Inner pages no longer raise that layer at all, and .page_ttl gets
+   its own paper ground. (The home hero keeps the bordeaux field.) */
+body:not(.home) .parallax_box--bg.blue {
+  opacity: 0 !important
+}
+
+.page_ttl-has_bg {
+  background-color: var(--clr-bg-01);
+  color: var(--clr-text-primary)
+}
+
+.page_ttl-has_bg .page_ttl-jp {
+  color: var(--clr-text-primary)
+}
+
+.page_ttl-has_bg .page_ttl-en {
+  color: var(--clr-primary-default)
+}
+
+/* title rule: bordeaux on the paper banner too */
+.page_ttl-has_bg .page_ttl-jp::after {
+  background-color: var(--clr-primary-default)
+}
+
+/* breadcrumbs on paper: ink links, secondary spans, bordeaux separators
+   and a bordeaux current item */
+.page_ttl-has_bg .breadcrumbs a {
+  color: var(--clr-text-primary)
+}
+
+.page_ttl-has_bg .breadcrumbs span span {
+  color: var(--clr-text-secondary)
+}
+
+.page_ttl-has_bg .breadcrumbs span span.breadcrumb_last {
+  color: var(--clr-primary-default)
+}
+
+.page_ttl-has_bg .breadcrumbs span span:not(:last-child)::after {
+  background-color: var(--clr-primary-default)
+}
+
+/* banner photo: Round 8 bordeaux scrim off — clean photo, framed on paper
+   (radius comes from the existing clip-path; hairline is an inset shadow
+   so the clip animation cannot cut it) */
+.page_ttl--bg::after {
+  content: none
+}
+
+.page_ttl--bg {
+  box-shadow: inset 0 0 0 1px rgba(32, 42, 54, .28)
+}
+
+/* plain archive banners: same paper ground, explicitly */
+.page_ttl:not(.page_ttl-has_bg) {
+  background-color: var(--clr-bg-01)
+}
+
+/* --- Inner pages: section composition ---
+   alternating faint bordeaux wash gives the page a visible rhythm;
+   the Round 8 bordeaux kicker bar and ink hairlines stay */
+body:not(.home) .lps_sec:nth-of-type(even) {
+  background-color: rgba(112, 30, 44, .04)
+}
+
+/* section titles scale up a step (SP variants keep their own vars) */
+body:not(.home) .lps_sec .ttl-01 {
+  font-size: calc(var(--font-size-display-sm) * 1.15)
+}
+
+body:not(.home) .lps_sec .ttl-01.font-en {
+  font-size: calc(var(--font-size-display-md) * 1.15)
+}
+
+@media screen and (max-width: 47.9375em) {
+  body:not(.home) .lps_sec .ttl-01 {
+    font-size: calc(var(--font-size-display-sm-sp) * 1.15)
+  }
+
+  body:not(.home) .lps_sec .ttl-01.font-en {
+    font-size: calc(var(--font-size-heading1-sp) * 1.15)
+  }
+}
