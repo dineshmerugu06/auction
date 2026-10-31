@@ -11828,3 +11828,47 @@ body:not(.home) .lps_sec .ttl-01.font-en {
     font-size: calc(var(--font-size-heading1-sp) * 1.15)
   }
 }
+
+/* ============================================================
+   Round 10: background colour change — ivory ground, ink hero
+   The grey-paper #F7F7F4 read as dull; the ground warms up to
+   warm ivory #FAF7F0 and the home hero field goes deep ink.
+   Bordeaux survives as the accent: circle, kickers, pills,
+   hovers, the nav hairline and the join-us panel.
+   ============================================================ */
+
+/* Ground: warm ivory replaces grey-paper. The token is consumed
+   site-wide (stage layer, banners, section grounds, CTA card,
+   wordmark/links on the ink bar), so redefining it here retunes
+   every ground at once. */
+:root {
+  --clr-bg-01: #FAF7F0
+}
+
+/* Home hero field: the flat accent stage layer goes deep ink.
+   Bordeaux stays on top of the field as accent (the bar's 2px
+   hairline, Register pill, kickers); inner pages keep Round 9's
+   hidden layer, so this only shows on the home hero. */
+.parallax_box--bg.blue {
+  background: var(--clr-text-primary)
+}
+
+/* Hero deco copy: the ghost lines are white at 20% — tuned for the
+   bordeaux field, they sink on the darker ink field, so the whole
+   deco layer lifts to 30% (still ghost type, nothing muddy) */
+.hero--deco {
+  color: hsla(0, 0%, 100%, .3)
+}
+
+/* Round 9's two hardcodes of the old paper colour (same colour in
+   rgb form), retargeted to ivory: Contact pill border on the ink
+   bar, and the mobile menu row hairlines */
+.gnav--cta .gnav--contact a {
+  border-color: rgba(250, 247, 240, .65)
+}
+
+@media screen and (max-width: 67.5em) {
+  .gnav--menu>li:not(:last-child) {
+    border-bottom-color: rgba(250, 247, 240, .18)
+  }
+}
