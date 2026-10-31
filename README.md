@@ -117,3 +117,11 @@ python3 -m http.server 8901 --directory /tmp/webroot
   returning visitors keep the old design.
 - **Photography:** page images live in `assets/media/`; swap a file
   in place (same name and dimensions) to replace a photo site-wide.
+
+## Quick start (npm)
+
+```
+npm run dev
+```
+
+Zero dependencies — Node only. Serves the site at http://localhost:3000/auction/ under its real prefix, exactly like GitHub Pages (root redirects there). Set `PORT` to change the port.

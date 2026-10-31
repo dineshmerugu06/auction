@@ -1,0 +1,10 @@
+{
+  "name": "auction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BidHouse Group — premium auction house website (static).",
+  "scripts": {
+    "dev": "node serve.js",
+    "start": "node serve.js"
+  }
+}
