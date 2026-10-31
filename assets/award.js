@@ -182,15 +182,11 @@
     var CLUSTERS = {
       "service": ["03", "LIVE AUCTIONS"],
       "product": ["03", "FEATURED LOTS"],
-      "technology": ["03", "BIDDING GUIDE"],
-      "equipment": ["03", "THE SALEROOM"],
       "solution": ["03", "PRIVATE SALES"],
       "recruit": ["04", "JOIN OUR TEAM"],
       "news": ["05", "NEWS & RESULTS"],
       "contact": ["06", "CONTACT"],
-      "privacy": ["06", "PRIVACY"],
-      "sitemap": ["01", "SITEMAP"],
-      "philosophy-message": ["02", "OUR VISION"]
+      "privacy": ["06", "PRIVACY"]
     };
     var en = document.querySelector(".page_ttl .page_ttl-en");
     if (en) {

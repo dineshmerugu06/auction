@@ -1,121 +1,119 @@
 # BidHouse Group — Premium Auction House
 
 The BidHouse Group website: a premium auction house selling fine watches,
-motor cars, art, jewellery and wine through live and online sales in
-New York and Chicago.
+motor cars, art, jewellery and wine through live and online sales.
 
 **Live site:** https://dineshmerugu06.github.io/auction/
 
-This site was built by mirroring an existing corporate website in full,
-then retheming every word, image and video to the BidHouse auction house.
-The layout, design system and behaviour are the original site's; the
-content is 100% BidHouse.
+A fully static website — plain HTML, CSS and JavaScript with no build step
+and no server-side code — designed and built as a ten-page site and hosted
+on GitHub Pages under `/auction/`.
 
-## Features added
+## The design
 
-- **Full static mirror** — 16 pages (pruned to auction-only content,
-  2026-10-31) rebuilt as plain static
-  HTML, hosted on GitHub Pages under `/auction/` (no build step, no server).
-- **Auction retheme** — 334 text strings rewritten to the auction house
-  (Live Auctions, Featured Lots, Bidding Guide, The Saleroom, Private
-  Sales, News & Results) and 254 images swapped in place at their exact
-  original dimensions, plus a new hero film (gavel + paddle clips,
-  `assets/media/2025/10/movie.mp4`, 1920×1080).
-- **Origin-logo 3D models removed (2026-10-30)** — the floating WebGL
-  models in "Our Business" turned out to be the previous company's logo
-  marks as 3D objects, so the whole WebGL layer was taken out: the
-  canvas element, the Three.js loader code, the model files and the
-  vendored Three.js library are all deleted. The section's photo cards
-  carry the section on their own now.
-- **Brand-trace cleanup** — every leftover trace of the previous identity
-  removed: page slugs, file names, CSS class names, form ids,
-  percent-encoded links and metadata were all renamed to BidHouse.
-- **Folder reorganization** — the old `wp/` tree was replaced with a
-  plain `assets/` layout (see the codebase map below) without changing
-  any page URL.
-- **Outlined-text SVG fix** — the homepage commitment graphic carried its
-  headline as invisible vector outlines; it is now real text
-  ("BIDHOUSE GROUP — Your end-to-end auction partner") inside the blue
-  circle.
-- **Warm-paper background restyle** — the old black stage behind every
-  section was replaced with one flat warm-paper ground (`#F7F7F4`), one
-  ink (`#202A36`) and one accent blue (`#116ABC`), flat colour only, no
-  gradients. Implemented as one clearly commented override block at the
-  end of `assets/theme/css/style.css` (search for `BidHouse paper
-  restyle`), so it can be reverted by deleting that block.
-- **Forms** — the Contact Form 7 forms render and validate in the
-  browser. On a static host they cannot send mail (known limit, below).
+An award-style editorial design system built around three colours and one
+typeface family pairing:
 
-## Codebase map
+- **Warm ivory** `#FAF7F0` — the paper ground every page sits on
+- **Ink** `#202A36` — text, the hero field and the fullscreen menu
+- **Bordeaux** `#701E2C` — accent only: kickers, rules, underlines, the
+  commitment circle
+- **Fraunces** (serif) for display type, a clean sans for body text
 
-Page folders at the top level **are the URLs**: each folder name is its
-path on the site and holds one `index.html`.
+Signature pieces:
+
+- **Poster hero** — a near-invisible top bar, a numbered kicker
+  (№ 01 — Live Auctions), the season line set at poster size in Fraunces
+  with masked line-by-line reveals, one lit photograph (the auctioneer's
+  gavel) offset inside a hairline frame, a catalogue-style lot label, and a
+  stat row (248 lots).
+- **Fullscreen menu** — the slim bar's MENU button opens a full-screen ink
+  overlay: six oversized Fraunces links with bordeaux numbers, a
+  duotone photograph strip, and a caps micro-label footer row.
+- **Chapter-opener banners** — every inner page opens the same way:
+  numbered bordeaux kicker, a huge ink Fraunces title, a 1px bordeaux
+  rule, quiet breadcrumbs, then the photograph full-bleed.
+- **Ruled index** — the Business section is a hairline-ruled index list
+  (number, name, arrow) instead of a card grid.
+- **Catalogue numbering** — sections are numbered like lots (№ 01–07 on
+  the home page, cluster numbers on inner pages) with estimates and lot
+  data set as large Fraunces numerals.
+- **Motion discipline** — one motion system site-wide (masked reveals and
+  slow image un-crops, transform/opacity only), with a
+  `prefers-reduced-motion` path that turns it off.
+
+## Features
+
+- Ten pages, all hand-finished in the same design system (see map below)
+- GSAP + ScrollTrigger scroll animations and Splide sliders throughout
+- Hero film (gavel and paddle clips, `assets/media/2025/10/movie.mp4`)
+- Contact and entry forms with conditional fields (rendered statically;
+  form submission needs a form backend, so on static hosting the forms
+  are for display)
+- Fully responsive — the design is checked phone-first at 390px
+
+## Tech stack
+
+- Static HTML / CSS / JavaScript — no framework, no build step
+- GSAP 3 + ScrollTrigger (scroll choreography), Splide (sliders)
+- jQuery + Contact Form 7 front-end scripts for the forms
+- Fonts: Fraunces + the body sans, loaded from Google Fonts
+- Hosting: GitHub Pages
+
+## Repository map
+
+Pages (10):
+
+| Path | Page |
+|---|---|
+| `index.html` | Home — poster hero, commitment, business index, strengths, join us, about, news |
+| `about-bidhouse/` | The House — company profile and access |
+| `service/` | Live Auctions (business cluster index) |
+| `product/` | Featured Lots |
+| `solution/` | Private Sales |
+| `news/` | News & Results |
+| `recruit/` | Join Our Team — careers |
+| `recruit/entry/` | Application entry form |
+| `contact/` | Contact form |
+| `privacy/` | Privacy policy |
+
+Assets:
 
 | Path | What it is |
-| --- | --- |
-| `index.html` | The home page |
-| `about-bidhouse/`, `about-saleroom/`, `about-group/` | About pages: BidHouse Inc., the Saleroom, the Group |
-| `product/`, `service/`, `solution/`, `technology/`, `equipment/` | Lots, services and expertise pages |
-| `news/` | News & Results — the list page (article, category and date-archive pages were pruned) |
-| `recruit/` | Careers — landing page and application form (`entry/`); the job-listing tree was pruned |
-| `contact/`, `privacy/`, `philosophy-message/`, `sitemap/` | Contact, privacy policy, message from the house, site map |
-| `assets/theme/` | The design system: all CSS, JS, images and logos |
-| `assets/theme/css/style.css` | The one stylesheet for the whole site (11,000+ lines, prettified). Colour variables live in `:root` at the top; the **paper-restyle override block** is at the very end |
-| `assets/theme/css/print.css`, `style-c.css` | Print styles; an empty stylesheet kept because pages still link it |
-| `assets/theme/dist/js/` | Page scripts (minified build output): `common.min.js` (every page), `home.min.js` (home only), `contact.min.js`, `not-home.min.js`, `not-contact.min.js`, `single-archive.min.js` |
-| `assets/theme/js/plugins/` | Animation libraries: GSAP, ScrollTrigger, Splide (sliders) |
-| `assets/theme/images/` | Theme images and logos (`logo-bidhouse-row.svg`, `logo-saleroom-row.svg`, section photos) |
-| `assets/theme/style.css` | Theme header/description file (legacy theme metadata, not the site's styles) |
-| `assets/media/YYYY/MM/` | Every photo and video used in page content, by year/month. Hero film: `assets/media/2025/10/movie.mp4` |
-| `assets/plugins/` | Form scripts: `contact-form-7`, `cf7-conditional-fields`, `akismet` |
-| `assets/core/` | Library JavaScript the pages load: jQuery + core dist JS |
-| `favicon.ico`, `apple-touch-icon.png` | Browser / home-screen icons |
-| `.nojekyll` | Tells GitHub Pages to serve the files exactly as-is (no Jekyll processing) |
-| `.gitignore` | Keeps `node_modules` out of the repo |
+|---|---|
+| `assets/theme/css/style.css` | The one stylesheet for the whole site. Colour variables live in `:root` at the top; restyle blocks are appended at the end in clearly commented sections |
+| `assets/award.js` | The award-style layer: injects the slim bar, the fullscreen menu, the home poster hero, the ruled index and the section kickers on every page. It derives its base path from its own script URL, so the same file works under any prefix |
+| `assets/theme/js/`, `assets/theme/dist/js/` | Theme behaviour (scroll stage, sliders, page scripts) |
+| `assets/theme/images/` | Theme imagery (hero stills, section photography) |
+| `assets/media/` | Page photography and the hero film, organised by year/month |
+| `assets/plugins/` | Form plug-in front-end assets (Contact Form 7, conditional fields) |
+| `assets/core/` | Core libraries (jQuery and support scripts) |
+| `favicon.ico`, `apple-touch-icon.png` | Site icons |
 
-## How it works
+## Run locally
 
-- **Static HTML per page.** Every page is a complete HTML file with the
-  shared header/footer markup written into it — there is no templating
-  or build step. Editing one page never affects another.
-- **One fixed background stage.** Behind the content sits a fixed,
-  full-screen stage (`.parallax_box--bg`) that all transparent sections
-  show through: a flat blue field at the top of the page that crossfades
-  to the paper ground as you scroll. The restyle override block in
-  `style.css` controls its colours.
-- **Animation.** GSAP + ScrollTrigger drive the scroll animations
-  (headline reveals, the commitment circle animation, parallax);
-  Splide runs the sliders. All wired in `assets/theme/dist/js/`.
-- **Forms are front-end only.** They render and validate in the
-  browser, but GitHub Pages cannot receive submissions or send mail.
+No build step. Serve the folder with any static server, keeping the
+`/auction/` prefix so absolute paths resolve:
+
+```sh
+mkdir -p /tmp/webroot && ln -sfn "$PWD" /tmp/webroot/auction
+python3 -m http.server 8901 --directory /tmp/webroot
+# open http://localhost:8901/auction/
+```
 
 ## How to edit
 
-- **Change text** — open the page's `index.html` and edit the HTML.
-- **Swap an image** — replace the file in `assets/media/` (or
-  `assets/theme/images/`) keeping the same file name and dimensions.
-- **Change colours** — edit the CSS variables in `:root` at the top of
-  `assets/theme/css/style.css`. For the background restyle, edit (or
-  delete, to revert) the `BidHouse paper restyle` block at the file's
-  end.
-- **Change the hero video** — replace `assets/media/2025/10/movie.mp4`.
-- **Run locally** — `python3 -m http.server` in this folder, then open
-  `http://localhost:8000/` (serve it, don't open the file directly).
-- **Deploy** — push to `main`. GitHub Pages publishes automatically;
-  allow a few minutes, then hard-refresh (Pages caches aggressively).
-
-## Verification notes
-
-- Every internal reference in the site was machine-checked after the
-  mirror, cleanup and reorganization (9,399 references, 0 unresolved).
-- The restyle was verified with browser screenshots of the home page
-  (full scroll, desktop + phone width) and the about, product, contact,
-  recruit and news pages before and after.
-- The prettified stylesheet was proven token-identical to the minified
-  original (whitespace-stripped comparison) and renders pixel-identical.
-- Live deploys are verified by comparing the live files' MD5 hashes
-  against the local copies.
-- The 2026-10-31 prune (29 pages + 69 orphaned media files removed)
-  was followed by a full re-check: 1,571 internal references,
-  0 unresolved, and a zero-tolerance origin-trace sweep (0 genuine
-  traces; the origin font-vendor script was removed from every page).
+- **Colours and type:** change the `:root` variables at the top of
+  `assets/theme/css/style.css` — the whole site follows the tokens.
+- **Design-system rules:** the restyle sections are appended at the very
+  end of `style.css` in commented blocks (paper ground, bordeaux identity,
+  award style). Add new rules in a new block at the end; do not rewrite
+  the base theme rules above them.
+- **Bar, menu, hero, kickers:** edit `assets/award.js` — one file drives
+  the chrome on all ten pages, so a change there lands everywhere.
+- **Cache stamp (important):** pages load the stylesheet as
+  `style.css?v=paper8`. Phones cache the old CSS hard — **bump the stamp
+  on every stylesheet change** (`paper9`, `paper10`, …) in every page, or
+  returning visitors keep the old design.
+- **Photography:** page images live in `assets/media/`; swap a file
+  in place (same name and dimensions) to replace a photo site-wide.
