@@ -13,7 +13,8 @@ content is 100% BidHouse.
 
 ## Features added
 
-- **Full static mirror** — 45 pages captured and rebuilt as plain static
+- **Full static mirror** — 16 pages (pruned to auction-only content,
+  2026-10-31) rebuilt as plain static
   HTML, hosted on GitHub Pages under `/auction/` (no build step, no server).
 - **Auction retheme** — 334 text strings rewritten to the auction house
   (Live Auctions, Featured Lots, Bidding Guide, The Saleroom, Private
@@ -55,8 +56,8 @@ path on the site and holds one `index.html`.
 | `index.html` | The home page |
 | `about-bidhouse/`, `about-saleroom/`, `about-group/` | About pages: BidHouse Inc., the Saleroom, the Group |
 | `product/`, `service/`, `solution/`, `technology/`, `equipment/` | Lots, services and expertise pages |
-| `news/` | News & Results — by category (`community/`, `safety/`, `careers/`, `benefits/`, `others/`) and by year (`date/`) |
-| `recruit/` | Careers — job listings (`job/`), application form (`entry/`) |
+| `news/` | News & Results — the list page (article, category and date-archive pages were pruned) |
+| `recruit/` | Careers — landing page and application form (`entry/`); the job-listing tree was pruned |
 | `contact/`, `privacy/`, `philosophy-message/`, `sitemap/` | Contact, privacy policy, message from the house, site map |
 | `assets/theme/` | The design system: all CSS, JS, images and logos |
 | `assets/theme/css/style.css` | The one stylesheet for the whole site (11,000+ lines, prettified). Colour variables live in `:root` at the top; the **paper-restyle override block** is at the very end |
@@ -114,3 +115,7 @@ path on the site and holds one `index.html`.
   original (whitespace-stripped comparison) and renders pixel-identical.
 - Live deploys are verified by comparing the live files' MD5 hashes
   against the local copies.
+- The 2026-10-31 prune (29 pages + 69 orphaned media files removed)
+  was followed by a full re-check: 1,571 internal references,
+  0 unresolved, and a zero-tolerance origin-trace sweep (0 genuine
+  traces; the origin font-vendor script was removed from every page).
